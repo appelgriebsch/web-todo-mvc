@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" manifest="offline.appcache">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+
+    <title>Backbone.js Todo List</title>
+
+    <link rel="stylesheet" href="styles/uikit.almost-flat.min.css"/>
+    <link rel="stylesheet" href="styles/todos.css"/>
+</head>
+
+<body>
+    <div role="application">
+        <!-- offsite settings panel -->
+        <div id="sidebar" class="uk-offcanvas">
+            <div class="uk-offcanvas-bar">
+                <nav id="sync-main" class="uk-nav uk-nav-offcanvas" data-uk-nav>
+                    <div class="uk-nav-header">Replication Settings</div>
+                    <div class="uk-nav-form uk-form uk-form-stacked">
+                        <div class="uk-form-row uk-nav-form">
+                            <label class="uk-form-label">Server URL</label>
+                            <div class="uk-form-controls">
+                                <input id="url" type="url" placeholder="server URL" class="uk-form-width-medium">
+                            </div>
+                        </div>
+                        <div class="uk-form-row uk-nav-form">
+                            <label class="uk-form-label">User Name</label>
+                            <div class="uk-form-controls">
+                                <input id="name" type="text" placeholder="User Name">
+                            </div>
+                        </div>
+                        <div class="uk-form-row uk-nav-form">
+                            <label class="uk-form-label">User Name</label>
+                            <div class="uk-form-controls">
+                                <input id="pwd" type="password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="uk-form-row uk-nav-form">
+                            <span>
+                                <button id="connect" class="uk-button uk-button-small">Connect</button>
+                                <button id="disconnect" class="uk-button uk-button-small">Disconnect</button>
+                            </span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        <!-- main application panel -->
+        <div id="todoapp">
+            <nav class="uk-navbar uk-navbar-attached">
+                <div class="uk-nav-header">
+                    <a href="#sidebar" class="uk-navbar-toggle" data-uk-offcanvas></a>
+                    <a href="/" class="uk-navbar-brand">Todo List</a>
+                </div>
+            </nav>
+            <div class="uk-container uk-container-center">
+                <div id="content" class="uk-grid" data-uk-grid-margin="">
+                    <div class="uk-panel uk-panel-box uk-panel-box-secondary uk-panel-space">
+                        <header class="uk-panel-header uk-form">
+                            <h1 class="uk-panel-title uk-float-left">CREATE A NEW TODO:</h1>
+                            <input id="new-todo" type="text" placeholder="What needs to be done?" class="uk-form-width-medium">
+                        </header>
+                        <ul id="todo-list" class="uk-panel-space">
+                        </ul>
+                        <footer class="footer">
+                            <div id=stats>
+                                <div id="todo-count"></div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript files -->
+    <script src="scripts/jquery-2.0.0.min.js"></script>
+    <script src="scripts/uikit.min.js"></script>
+    <script src="scripts/underscore-min.js"></script>
+    <script src="scripts/backbone-min.js"></script>
+    <script src="scripts/pouchdb-nightly.min.js"></script>
+    <script src="scripts/backbone-pouch.min.js"></script>
+    <script src="scripts/todos.js"></script>
+
+    <!-- Templates -->
+    <script type="text/template" id="item-template">
+        <div class="view uk-float-left">
+            <label>
+                <input type="checkbox" class="toggle" <%= finished == "true" ? 'checked="checked"' : '' %> />
+                <span><%= title %></span>
+            </label>
+        </div>
+        <input type="text" class="edit" value="<%= title %>"/>
+        <div id="options" class="uk-float-right">
+            <button id="edit" class="uk-button uk-button-primary uk-button-small">Edit</button>
+            <button id="destroy" class="uk-button uk-button-danger uk-button-small">Delete</button>
+        </div>
+    </script>
+    <script type="text/template" id="stats-template">
+        <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+    </script>
+    <script type="text/template" id="sync-stats-template">
+        <div class=docs>
+            <%= read %>↔<%= written %>
+        </div>
+        <div class="replication-count">Syncing <b><%= count %></b> <%= count == 1 ? 'database' : 'databases' %></div>
+    </script>
+</body>
+</html>
