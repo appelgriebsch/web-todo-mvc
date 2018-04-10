@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html lang="en" manifest="offline.appcache">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta name="apple-mobile-web-app-title" content="TodoList-MVC">
+    <meta name="apple-mobile-web-app-capable" content="yes">
 
     <title>Backbone.js Todo List</title>
 
-    <link rel="stylesheet" href="styles/uikit.almost-flat.min.css"/>
-    <link rel="stylesheet" href="styles/todos.css"/>
+    <link rel="apple-touch-icon" href="images/icons/icon-128x128.png" />
+
+    <link rel="stylesheet" href="styles/uikit.almost-flat.min.css" />
+    <link rel="stylesheet" href="styles/todos.css" />
 </head>
 
 <body>
@@ -108,4 +112,5 @@
         <div class="replication-count">Syncing <b><%= count %></b> <%= count == 1 ? 'database' : 'databases' %></div>
     </script>
 </body>
+
 </html>
